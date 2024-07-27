@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  patient-api:
+    build:
+      context: .
+      dockerfile: PatientAdministrationSystem.API/Dockerfile
+    container_name: patient-api
+    ports:
+      - "5000:80"
+    volumes:
+      - ./PatientAdministrationSystem.API:/app
+    working_dir: /app
+    command: ["dotnet", "watch", "run"]
+
+  react-client:
+    build:
+      context: ./PatientAdministrationSystem.UI
+      dockerfile: Dockerfile
+    container_name: react-client
+    ports:
+      - "3000:80"
